@@ -1,8 +1,12 @@
 import Head from "next/head";
 
-import { Header } from "@/components";
+import { Header, NavBar } from "@/components";
+import request from "@/utils/request";
 
-export default function Home() {
+export default function Home({ results }) {
+
+  console.log(results);
+
   return (
     <div>
       <Head>
@@ -12,7 +16,21 @@ export default function Home() {
 
       <main>
         <Header />
+        <NavBar />
       </main>
     </div>
   )
+}
+
+
+export async function getServerSideProps(context) {
+  const { genre } = context.query;
+  const res = await fetch(`${request[genre]?.url || request.fetchTrending.url}`);
+  const { results } = await res.json();
+
+  return {
+    props: {
+      results
+    }
+  }
 }
