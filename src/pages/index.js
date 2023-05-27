@@ -1,12 +1,9 @@
 import Head from "next/head";
 
-import { Header, NavBar } from "@/components";
+import { Header, NavBar, Result } from "@/components";
 import request from "@/utils/request";
 
 export default function Home({ results }) {
-
-  console.log(results);
-
   return (
     <div>
       <Head>
@@ -17,6 +14,7 @@ export default function Home({ results }) {
       <main>
         <Header />
         <NavBar />
+        <Result results={results} />
       </main>
     </div>
   )
